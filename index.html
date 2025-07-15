@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickLend - Fast & Easy Loans | Get Approved Today</title>
+    <meta name="description" content="QuickLend offers fast, easy loans with competitive rates. Personal, auto, home, and business loans available. Apply online and get approved today.">
+    <meta property="og:title" content="QuickLend - Fast & Easy Loans">
+    <meta property="og:description" content="Quick approval, competitive rates, and flexible terms. Your financial goals are within reach with QuickLend.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicklend.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; }
+        .toast { position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 500; z-index: 1001; transform: translateX(100%); opacity: 0; transition: all 0.3s ease; }
+        .toast.show { transform: translateX(0); opacity: 1; }
+        .toast.success { background-color: #10b981; }
+        .toast.error { background-color: #ef4444; }
+        .mobile-nav.active { display: block; }
+        .faq-item.active .faq-answer { max-height: 200px; opacity: 1; }
+        .faq-answer { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Toast notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300 bg-white shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-coins text-blue-600 text-2xl"></i>
+                    <span class="text-2xl font-bold text-blue-600">QuickLend</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <button onclick="scrollToSection('home')" class="text-gray-700 hover:text-blue-600 transition-colors">Home</button>
+                    <button onclick="scrollToSection('loans')" class="text-gray-700 hover:text-blue-600 transition-colors">Loans</button>
+                    <button onclick="scrollToSection('calculator')" class="text-gray-700 hover:text-blue-600 transition-colors">Calculator</button>
+                    <button onclick="scrollToSection('apply')" class="text-gray-700 hover:text-blue-600 transition-colors">Apply</button>
+                    <button onclick="scrollToSection('contact')" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</button>
+                    <button onclick="scrollToSection('apply')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">Get Started</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-700" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div class="md:hidden bg-white border-t hidden" id="mobileNav">
+                <div class="py-4 space-y-4">
+                    <button onclick="scrollToSection('home')" class="block w-full text-left text-gray-700 hover:text-blue-600 transition-colors">Home</button>
+                    <button onclick="scrollToSection('loans')" class="block w-full text-left text-gray-700 hover:text-blue-600 transition-colors">Loans</button>
+                    <button onclick="scrollToSection('calculator')" class="block w-full text-left text-gray-700 hover:text-blue-600 transition-colors">Calculator</button>
+                    <button onclick="scrollToSection('apply')" class="block w-full text-left text-gray-700 hover:text-blue-600 transition-colors">Apply</button>
+                    <button onclick="scrollToSection('contact')" class="block w-full text-left text-gray-700 hover:text-blue-600 transition-colors">Contact</button>
+                    <button onclick="scrollToSection('apply')" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="bg-gradient-to-br from-blue-600 to-blue-800 text-white pt-20 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Get the Loan You Need, <span class="text-yellow-400">Fast & Easy</span>
+                    </h1>
+                    <p class="text-xl mb-8 opacity-90">
+                        Quick approval, competitive rates, and flexible terms. Your financial goals are within reach with QuickLend.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <button onclick="scrollToSection('apply')" class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 text-lg font-semibold rounded-lg transition-colors">
+                            Apply Now
+                        </button>
+                        <button onclick="scrollToSection('calculator')" class="bg-white text-blue-600 hover:bg-gray-100 border-white px-8 py-3 text-lg font-semibold rounded-lg transition-colors">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Loan
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">5 min</div>
+                            <div class="text-sm opacity-80">Application</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">2.99%</div>
+                            <div class="text-sm opacity-80">Starting Rate</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold">$50K</div>
+                            <div class="text-sm opacity-80">Max Loan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Professional loan consultation meeting" class="rounded-xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loan Types Section -->
+    <section id="loans" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Choose the Right Loan for You
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    From personal needs to business growth, we have flexible loan options to match your goals.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Personal Loans</h3>
+                    <p class="text-gray-600 mb-4">Consolidate debt, fund vacations, or handle unexpected expenses.</p>
+                    <div class="text-gray-700 font-semibold mb-4">
+                        <div>$1,000 - $50,000</div>
+                        <div class="text-sm">2.99% - 29.99% APR</div>
+                    </div>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                        Learn More
+                    </button>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="bg-green-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-car text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Auto Loans</h3>
+                    <p class="text-gray-600 mb-4">Finance your new or used vehicle with competitive rates.</p>
+                    <div class="text-gray-700 font-semibold mb-4">
+                        <div>$5,000 - $100,000</div>
+                        <div class="text-sm">1.99% - 7.99% APR</div>
+                    </div>
+                    <button class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                        Learn More
+                    </button>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="bg-yellow-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-home text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Home Loans</h3>
+                    <p class="text-gray-600 mb-4">Make homeownership dreams a reality with our mortgage options.</p>
+                    <div class="text-gray-700 font-semibold mb-4">
+                        <div>$50,000 - $2M</div>
+                        <div class="text-sm">3.25% - 8.50% APR</div>
+                    </div>
+                    <button class="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                        Learn More
+                    </button>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                    <div class="bg-purple-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-briefcase text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Business Loans</h3>
+                    <p class="text-gray-600 mb-4">Fuel your business growth with flexible financing solutions.</p>
+                    <div class="text-gray-700 font-semibold mb-4">
+                        <div>$10,000 - $500,000</div>
+                        <div class="text-sm">4.99% - 19.99% APR</div>
+                    </div>
+                    <button class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Loan Calculator
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Calculate your monthly payments and see how much you can afford
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-6">Loan Details</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Loan Amount</label>
+                                <input type="number" id="loanAmount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="25000" min="1000" max="500000">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Interest Rate (%)</label>
+                                <input type="number" id="interestRate" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="5.5" min="0.1" max="30" step="0.1">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Loan Term (Years)</label>
+                                <input type="number" id="loanTerm" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" value="5" min="1" max="30">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-800 mb-6">Calculation Results</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Monthly Payment:</span>
+                                <span class="text-xl font-bold text-blue-600" id="monthlyPayment">$480.85</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Total Interest:</span>
+                                <span class="text-lg font-semibold text-gray-800" id="totalInterest">$3,851.00</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-700">Total Amount:</span>
+                                <span class="text-lg font-semibold text-gray-800" id="totalAmount">$28,851.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Section -->
+    <section id="apply" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Apply for Your Loan
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Quick and easy application process. Get approved in minutes.
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <form id="loanForm" class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                            <input type="text" id="firstName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                            <input type="text" id="lastName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+                            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Phone *</label>
+                            <input type="tel" id="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Loan Type *</label>
+                            <select id="loanTypeSelect" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                <option value="">Select Loan Type</option>
+                                <option value="personal">Personal Loan</option>
+                                <option value="auto">Auto Loan</option>
+                                <option value="home">Home Loan</option>
+                                <option value="business">Business Loan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Requested Amount *</label>
+                            <input type="number" id="requestedAmount" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" min="1000" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Annual Income *</label>
+                            <input type="number" id="income" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" min="0" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Employment Status *</label>
+                            <select id="employment" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                                <option value="">Select Employment Status</option>
+                                <option value="employed">Employed</option>
+                                <option value="self-employed">Self-Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="retired">Retired</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Purpose of Loan</label>
+                        <textarea id="purpose" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell us about the purpose of your loan..."></textarea>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <label class="flex items-start">
+                            <input type="checkbox" id="terms" class="mt-1 mr-3" required>
+                            <span class="text-sm text-gray-700">I agree to the <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a> *</span>
+                        </label>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold text-lg transition-colors">
+                            Submit Application
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Get answers to common questions about our loan services
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-4">
+                    <div class="faq-item bg-gray-50 rounded-lg">
+                        <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-gray-800">How fast can I get approved?</span>
+                            <i class="fas fa-plus faq-icon text-blue-600"></i>
+                        </button>
+                        <div class="faq-answer p-6 pt-0">
+                            <p class="text-gray-600">Most applications are approved within 24 hours. Once approved, funds can be deposited into your account as quickly as the same business day.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-50 rounded-lg">
+                        <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-gray-800">What credit score do I need?</span>
+                            <i class="fas fa-plus faq-icon text-blue-600"></i>
+                        </button>
+                        <div class="faq-answer p-6 pt-0">
+                            <p class="text-gray-600">We work with borrowers across the credit spectrum. While a higher credit score may qualify you for better rates, we have options for those with fair credit as well.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-50 rounded-lg">
+                        <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-gray-800">Are there any hidden fees?</span>
+                            <i class="fas fa-plus faq-icon text-blue-600"></i>
+                        </button>
+                        <div class="faq-answer p-6 pt-0">
+                            <p class="text-gray-600">No hidden fees! We believe in transparency. All fees and terms are clearly disclosed before you sign any agreement.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item bg-gray-50 rounded-lg">
+                        <button class="faq-question w-full text-left p-6 flex justify-between items-center">
+                            <span class="text-lg font-semibold text-gray-800">Can I pay off my loan early?</span>
+                            <i class="fas fa-plus faq-icon text-blue-600"></i>
+                        </button>
+                        <div class="faq-answer p-6 pt-0">
+                            <p class="text-gray-600">Yes! You can pay off your loan early without any prepayment penalties. This can save you money on interest charges.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    Get in Touch
+                </h2>
+                <p class="text-xl text-gray-300">
+                    Have questions? We're here to help!
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-400 text-xl mr-4"></i>
+                            <span>123 Financial Street, Suite 100<br>New York, NY 10001</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-blue-400 text-xl mr-4"></i>
+                            <span>(555) 123-LOAN (5626)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-blue-400 text-xl mr-4"></i>
+                            <span>quicklend.online@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-blue-400 text-xl mr-4"></i>
+                            <span>Mon-Fri: 8AM-8PM EST<br>Sat: 9AM-5PM EST</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.facebook.com/share/1L99VUFjAq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition-colors">
+                                <i class="fab fa-facebook-f text-2xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6">Send us a Message</h3>
+                    <form id="contactForm">
+                        <div class="space-y-4">
+                            <div>
+                                <input type="text" id="contactName" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white" placeholder="Your Name" required>
+                            </div>
+                            <div>
+                                <input type="email" id="contactEmail" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white" placeholder="Your Email" required>
+                            </div>
+                            <div>
+                                <input type="text" id="contactSubject" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white" placeholder="Subject" required>
+                            </div>
+                            <div>
+                                <textarea id="contactMessage" rows="4" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-coins text-blue-400 text-2xl"></i>
+                        <span class="text-2xl font-bold">QuickLend</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Your trusted partner for fast and flexible financing solutions.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Loan Types</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Personal Loans</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Auto Loans</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Home Loans</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Business Loans</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400">&copy; 2023 QuickLend. All rights reserved.</p>
+                    <div class="mt-4 md:mt-0">
+                        <a href="https://www.facebook.com/share/1L99VUFjAq/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition-colors">
+                            <i class="fab fa-facebook-f text-xl mr-2"></i>
+                            <span class="text-sm">Follow us on Facebook</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
